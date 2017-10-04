@@ -36,6 +36,7 @@ class MyServer(BaseHTTPRequestHandler):
 
         # SQA has sid, qid, score
         # QT has qid and list of associated topics
+        print inputParams
 
         if int(inputParams['load']) == 0:
             indivdualComp = float(inputParams['competencyValue'])

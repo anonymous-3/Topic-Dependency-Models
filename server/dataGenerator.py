@@ -76,9 +76,10 @@ def computeDifficulty(mean, knowledgeGap):
 #def computeanswer(knowledgeGap):
 #    return np.random.choice(np.arange(0,2), p=[knowledgeGap, 1-knowledgeGap])                
                 
-def computeanswer(knowledgeGap):
-    competency = 1-knowledgeGap
-    probofSuccess =  (1)/(1 + math.exp( -0.5 * (competency*20 - 10) -  0.5))
+def computeanswer(knowledgeGap, qdiff):
+    competencydif = 1 - (knowledgeGap + float(qdiff)/2.5)/3
+    print knowledgeGap, float(qdiff)/5, competencydif
+    probofSuccess =  (1)/(1 + math.exp( -0.5 * (competencydif*20 -  10) -  0.5))
     return np.random.choice([-1,1], p=[1-probofSuccess, probofSuccess])     
     #return np.random.choice(np.arange(0,2), p=[1-probofSuccess, probofSuccess])     
     #return np.random.choice(np.arange(0,2), p=[knowledgeGap, 1-knowledgeGap])                
@@ -106,7 +107,7 @@ def createOutput(N,M, Users, Questions, listOfTopics):
             while (selected[u][q]==1):
                 q = randint(0,M-1)
             selected[u][q]=1
-            A = computeanswer(getAvgCompetencyAcrossTopics(Users[u][2],Questions[q][1],listOfTopics))
+            A = computeanswer(getAvgCompetencyAcrossTopics(Users[u][2],Questions[q][1],listOfTopics),Questions[q][2])
             SQA.append([Users[u][0], Questions[q][0], A])            
     for q in range(M): # create  QT
         for topics in Questions[q][1]:
@@ -120,7 +121,8 @@ def createDataset(inputParams):
     N = int(inputParams['studentNumber'])
     M = int(inputParams['questionNumber'])
     numCategories = int(inputParams['topicNumber'])
-    A = N * int(round(int(M)/10)) #number of answers
+    #A = N * int(round(float(M)/20)) #number of answers
+    A = N * M
     alpha = float(inputParams['studentDiversity'])
     maxTopic = 2 # Maxuimum number of topics per quewtion
     D_sigma = 2
@@ -134,9 +136,6 @@ def createDataset(inputParams):
     Questions = createQuestions(M,numCategories,listOfTopics, maxTopic, D_mu, D_sigma)
     SQA, QT = createOutput(N,M,Users,Questions,listOfTopics)
     return SQA, QT
-
-
-
 
 
 def exists(edges, n1, n2):

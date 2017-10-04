@@ -91,6 +91,13 @@ def addTopicCombination(T):
 
 
 def ComputeScopeCompetency(A, T, I_A,topicCombinations):
+    print 'A'
+    print A
+    print 'T'
+    print T
+    print 'I_A'
+    print I_A
+
     for j in range(len(A[0])):
         # scope
         current_I_A= I_A[:,j]
@@ -136,7 +143,6 @@ def ComputeIndividualScopeCompetency(A, T, I_A,topicCombinations,Individual):
             key = getTopicString(T[j])
             values = topicCombinations[key]
             values[1]=(A[target][j]+ values[1])
-       
     return topicCombinations
 
 def ComputeUserScopeCompetency(A, T, I_A,topicCombinations,userIndex):
@@ -152,7 +158,7 @@ def ComputeUserScopeCompetency(A, T, I_A,topicCombinations,userIndex):
             key = getTopicString(T[j])
             values = topicCombinations[key]
             values[1]=(A[userIndex][j]+ values[1])
-       
+    print topicCombinations   
     return topicCombinations
 
 def createGraphList(updatedTopicCombinations, tDict):
@@ -184,6 +190,7 @@ def generateTDM(SQA, QT):
      updatedTopicCombinations = ComputeScopeCompetency(A, T, I_A,topicCombinations)
      edges = createGraphList(updatedTopicCombinations, tDict)
      nodes = getnodes(tDict)
+     print edges
      return {
         "edges": edges,
         "nodes": nodes
@@ -217,7 +224,6 @@ def generateUserTDM(SQA, QT,User):
      updatedTopicCombinations = ComputeUserScopeCompetency(A, T, I_A,topicCombinations,userIndex)
      edges = createGraphList(updatedTopicCombinations, tDict)
      nodes = getnodes(tDict)
-     print edges
      return {
         "edges": edges,
         "nodes": nodes

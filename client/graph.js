@@ -48,9 +48,11 @@ console.log("called Tick");
 
     var maxWeight = d3.max(edges.map(x => x.attempts));
     var minWeight = d3.min(edges.map(x => x.attempts));
-    var lineColour = d3.interpolate("pink", "#256");
-    var maxColour = d3.max(edges.map(x => x.competency));
-    var minColour = d3.min(edges.map(x => x.competency));
+    var lineColour = d3.interpolate("#256", "pink");
+    //var maxColour = d3.max(edges.map(x => x.competency));
+    //var minColour = d3.min(edges.map(x => x.competency));
+    var maxColour = 100
+    var minColour = 0
     var getStrokeColour = d => lineColour((d.competency - maxColour) / (minColour - maxColour));
 
     var svg = d3.select(target)

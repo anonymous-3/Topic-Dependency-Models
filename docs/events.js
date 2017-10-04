@@ -11,7 +11,8 @@ function updateGraph(e) {
         return x.getAttribute("data-name") + "=" + value;
     }).join("&");
 
-    d3.json("https://khosravi.uqcloud.net/tdm/?load=0&" + query, function (response) {
+        // d3.json("https://khosravi.uqcloud.net/tdm/?load=0&" + query, function (response) {
+        d3.json("localhost:9000?load=0&" + query, function (response) { 
         var target = document.getElementById("graphContainer");
         target.innerHTML = "";
         var height = document.getElementById("configurationContainer").getBoundingClientRect().height;
@@ -174,7 +175,9 @@ function updateSelect(e) {
 	var loadedUser = document.getElementById("selectUser");
 	loadedUser.length = 1;
 
-    d3.json("https://khosravi.uqcloud.net/tdm/?load=1", function (response) {
+    //d3.json("https://khosravi.uqcloud.net/tdm/?load=1", function (response) {
+    d3.json("localhost:9000?load=1&" + query, function (response) { 
+            
         response.forEach(function (user) {
 			var y = document.createElement('option');
 			y.text = user;

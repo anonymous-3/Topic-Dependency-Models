@@ -52,7 +52,7 @@ console.log("called Tick");
     //var maxColour = d3.max(edges.map(x => x.competency));
     //var minColour = d3.min(edges.map(x => x.competency));
     var maxColour = 100
-    var minColour = 0
+    var minColour = 20
     var getStrokeColour = d => lineColour((d.competency - maxColour) / (minColour - maxColour));
 
     var svg = d3.select(target)

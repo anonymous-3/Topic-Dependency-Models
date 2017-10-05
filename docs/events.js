@@ -130,7 +130,7 @@ window.addEventListener("load", function () {
             });
         });
 
-	document.getElementById("defaultOpen").click();
+	//document.getElementById("defaultOpen").click();
 
     document.getElementById("simulateButton").addEventListener("click", updateGraph);
 
